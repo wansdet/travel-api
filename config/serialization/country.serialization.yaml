@@ -1,0 +1,35 @@
+# config/serialization/country.serialization.yaml
+App\Entity\Country:
+    attributes:
+        countryCode:
+            groups: ['Country:read', 'CountryCollection:read', 'Country:write', 'Region:read']
+        countryName:
+            groups: ['Country:read', 'CountryCollection:read', 'Country:update' ,'Country:write', 'Region:read']
+        region:
+            groups: ['Country:read', 'Country:update' ,'Country:write']
+        capital:
+            groups: ['Country:read', 'Country:update' ,'Country:write']
+        briefDescription:
+            groups: ['Country:read', 'CountryCollection:read', 'Country:update' ,'Country:write', 'Region:read']
+        shortDescription:
+            groups: ['Country:read', 'Country:update' ,'Country:write']
+        longDescription:
+            groups: ['Country:read', 'Country:update' ,'Country:write']
+        currency:
+            groups: ['Country:read', 'Country:update' ,'Country:write']
+        language:
+            groups: ['Country:read', 'Country:update' ,'Country:write']
+        atm:
+            groups: ['Country:read', 'Country:update' ,'Country:write']
+        mobilePhone:
+            groups: ['Country:read', 'Country:update' ,'Country:write']
+        electricity:
+            groups: ['Country:read', 'Country:update' ,'Country:write']
+        imageTags:
+            groups: ['Country:read', 'Country:update' ,'Country:write']
+        ranking:
+            groups: ['Region:read', 'RegionCollection:read', 'Region:update' ,'Region:write']
+        sortOrder:
+            groups: ['Country:read', 'CountryCollection:read', 'Country:update' ,'Country:write', 'Region:read']
+        places:
+            groups: ['Country:read']

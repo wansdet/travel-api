@@ -1,0 +1,39 @@
+# config/serialization/place.serialization.yaml
+App\Entity\Place:
+    attributes:
+        id:
+            groups: ['Place:read', 'PlaceCollection:read', 'Place:update' ,'Place:write', 'Country:read']
+        placeName:
+            groups: ['Place:read', 'PlaceCollection:read', 'Place:update' ,'Place:write', 'Country:read']
+        countryRegion:
+            groups: ['Place:read', 'Place:update' ,'Place:write']
+        briefDescription:
+            groups: ['Place:read', 'PlaceCollection:read', 'Place:update' ,'Place:write', 'Country:read']
+        longDescription:
+            groups: ['Place:read', 'Place:update' ,'Place:write']
+        travelInformation:
+            groups: ['Place:read', 'Place:update' ,'Place:write']
+        bestTimeToVisit:
+            groups: ['Place:read', 'Place:update' ,'Place:write']
+        thingsToDo:
+            groups: ['Place:read', 'Place:update' ,'Place:write']
+        accommodation:
+            groups: ['Place:read', 'Place:update' ,'Place:write']
+        food:
+            groups: ['Place:read', 'Place:update' ,'Place:write']
+        imageTags:
+            groups: ['Place:read', 'Place:update' ,'Place:write']
+        tags:
+            groups: ['Place:read', 'Place:update' ,'Place:write']
+        ranking:
+            groups: ['Place:read', 'PlaceCollection:read', 'Place:update' ,'Place:write', 'Country:read']
+        worldRanking:
+            groups: [ 'Place:read', 'PlaceCollection:read', 'Place:update' ,'Place:write' ]
+        sortOrder:
+            groups: ['Place:read', 'PlaceCollection:read', 'Place:update' ,'Place:write', 'Country:read']
+        country:
+            groups: ['Place:read', 'PlaceCollection:read', 'Place:update' ,'Place:write']
+        placeImages:
+            groups: ['Place:read', 'PlaceCollection:read']
+
+

@@ -1,0 +1,10 @@
+# config/filter/featured-destination.filter.yaml
+services:
+    featured_destination.search_filter:
+        parent: 'api_platform.doctrine.orm.search_filter'
+        arguments: [{ id: exact, pageType: exact }]
+        tags: ['api_platform.filter']
+    featured_destination.order_filter:
+        parent: 'api_platform.doctrine.orm.order_filter'
+        arguments: [{ id: 'ASC', sortOrder: 'ASC' }]
+        tags: ['api_platform.filter']

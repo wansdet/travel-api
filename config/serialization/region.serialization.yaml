@@ -1,0 +1,27 @@
+# config/serialization/region.serialization.yaml
+App\Entity\Region:
+    attributes:
+        countries:
+            groups: ['Region:read']
+        regionCode:
+            groups: ['Region:read', 'RegionCollection:read', 'Region:write']
+        regionName:
+            groups: ['Region:read', 'RegionCollection:read', 'Region:update' ,'Region:write']
+        briefDescription:
+            groups: ['Region:read', 'RegionCollection:read', 'Region:update' ,'Region:write']
+        shortDescription:
+            groups: [ 'Region:read', 'Region:update' ,'Region:write' ]
+        longDescription:
+            groups: ['Region:read', 'Region:update' ,'Region:write']
+        imageTags:
+            groups: ['Region:read', 'Region:update' ,'Region:write']
+        ranking:
+            groups: ['Region:read', 'RegionCollection:read', 'Region:update' ,'Region:write']
+        createdAt:
+            groups: ['Region:read']
+        updatedAt:
+            groups: ['Region:read']
+        updatedBy:
+            groups: ['Region:read', 'Region:update']
+        sortOrder:
+            groups: ['Region:read', 'RegionCollection:read', 'Region:update' ,'Region:write']

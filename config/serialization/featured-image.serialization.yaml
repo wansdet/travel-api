@@ -1,0 +1,25 @@
+# config/serialization/featured-image.serialization.yaml
+App\Entity\FeaturedImage:
+    attributes:
+        id:
+            groups: ['FeaturedImage:read', 'FeaturedImageCollection:read', 'FeaturedImage:write']
+        pageType:
+            groups: ['FeaturedImage:read', 'FeaturedImageCollection:read', 'FeaturedImage:update' ,'FeaturedImage:write']
+        destinationCode:
+            groups: ['FeaturedImage:read', 'FeaturedImageCollection:read', 'FeaturedImage:update' ,'FeaturedImage:write']
+        section:
+            groups: ['FeaturedImage:read', 'FeaturedImageCollection:read', 'FeaturedImage:update' ,'FeaturedImage:write']
+        orientation:
+            groups: ['FeaturedImage:read', 'FeaturedImageCollection:read', 'FeaturedImage:update' ,'FeaturedImage:write']
+        title:
+            groups: ['FeaturedImage:read', 'FeaturedImageCollection:read', 'FeaturedImage:update' ,'FeaturedImage:write']
+        description:
+            groups: ['FeaturedImage:read', 'FeaturedImageCollection:read', 'FeaturedImage:update' ,'FeaturedImage:write']
+        filePath:
+            groups: ['FeaturedImage:read', 'FeaturedImageCollection:read', 'FeaturedImage:update' ,'FeaturedImage:write']
+        link:
+            groups: ['FeaturedImage:read', 'FeaturedImageCollection:read', 'FeaturedImage:update' ,'FeaturedImage:write']
+        ranking:
+            groups: ['FeaturedImage:read', 'FeaturedImageCollection:read', 'FeaturedImage:update' ,'FeaturedImage:write']
+        sortOrder:
+            groups: ['FeaturedImage:read', 'FeaturedImageCollection:read', 'FeaturedImage:update' ,'FeaturedImage:write']

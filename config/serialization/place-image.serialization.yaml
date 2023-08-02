@@ -1,0 +1,21 @@
+# config/serialization/place-image.serialization.yaml
+App\Entity\PlaceImage:
+    attributes:
+        id:
+            groups: ['PlaceImage:read', 'PlaceImageCollection:read', 'PlaceImage:update' ,'PlaceImage:write', 'Place:read', 'PlaceCollection:read']
+        title:
+            groups: ['PlaceImage:read', 'PlaceImageCollection:read', 'PlaceImage:update' ,'PlaceImage:write', 'Place:read']
+        description:
+            groups: ['PlaceImage:read', 'PlaceImageCollection:read', 'PlaceImage:update' ,'PlaceImage:write', 'Place:read']
+        orientation:
+            groups: ['PlaceImage:read', 'PlaceImageCollection:read', 'PlaceImage:update' ,'PlaceImage:write', 'Place:read', 'PlaceCollection:read']
+        filePath:
+            groups: ['PlaceImage:read', 'PlaceImageCollection:read', 'PlaceImage:update' ,'PlaceImage:write', 'Place:read', 'PlaceCollection:read']
+        countryCode:
+            groups: ['PlaceImage:read', 'PlaceImageCollection:read', 'PlaceImage:update' ,'PlaceImage:write', 'Place:read']
+        regionCode:
+            groups: ['PlaceImage:read', 'PlaceImageCollection:read', 'PlaceImage:update' ,'PlaceImage:write', 'Place:read']
+        sortOrder:
+            groups: ['PlaceImage:read', 'PlaceImageCollection:read', 'PlaceImage:update' ,'PlaceImage:write', 'Place:read', 'PlaceCollection:read']
+        place:
+            groups: ['PlaceImage:read', 'PlaceImageCollection:read', 'PlaceImage:write']

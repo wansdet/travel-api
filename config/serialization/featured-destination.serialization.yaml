@@ -1,0 +1,17 @@
+# config/serialization/featured-destination.serialization.yaml
+App\Entity\FeaturedDestination:
+    attributes:
+        id:
+            groups: ['FeaturedDestination:read', 'FeaturedDestinationCollection:read', 'FeaturedDestination:write']
+        pageType:
+            groups: ['FeaturedDestination:read', 'FeaturedDestinationCollection:read', 'FeaturedDestination:update' ,'FeaturedDestination:write']
+        destinationCode:
+            groups: ['FeaturedDestination:read', 'FeaturedDestinationCollection:read', 'FeaturedDestination:update' ,'FeaturedDestination:write']
+        section:
+            groups: ['FeaturedDestination:read', 'FeaturedDestinationCollection:read', 'FeaturedDestination:update' ,'FeaturedDestination:write']
+        title:
+            groups: ['FeaturedDestination:read', 'FeaturedDestinationCollection:read', 'FeaturedDestination:update' ,'FeaturedDestination:write']
+        description:
+            groups: ['FeaturedDestination:read', 'FeaturedDestinationCollection:read', 'FeaturedDestination:update' ,'FeaturedDestination:write']
+        sortOrder:
+            groups: ['FeaturedDestination:read', 'FeaturedDestinationCollection:read', 'FeaturedDestination:update' ,'FeaturedDestination:write']

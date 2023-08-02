@@ -1,0 +1,10 @@
+api_platform:
+    title: TRAVEL API
+    version: 1.0.0
+    defaults:
+        pagination_enabled: false
+        pagination_client_enabled: true
+        pagination_items_per_page: 100 # Default value
+    collection:
+        pagination:
+            enabled_parameter_name: pagination # optional
