@@ -36,6 +36,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             denormalizationContext: [
                 'groups' => ['PlaceImage:write'],
             ],
+            security: 'is_granted("ROLE_EDITOR")',
         ),
         new Put(
             normalizationContext: [
@@ -44,6 +45,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             denormalizationContext: [
                 'groups' => ['PlaceImage:update'],
             ],
+            security: 'is_granted("ROLE_EDITOR")',
         ),
         new Patch(
             normalizationContext: [
@@ -52,8 +54,10 @@ use Symfony\Component\Validator\Constraints as Assert;
             denormalizationContext: [
                 'groups' => ['PlaceImage:update'],
             ],
+            security: 'is_granted("ROLE_EDITOR")',
         ),
         new Delete(
+            security: 'is_granted("ROLE_EDITOR")',
         ),
     ],
     filters: [
@@ -148,56 +152,56 @@ class PlaceImage
         return $this->title;
     }
 
-    public function setCountryCode(?string $countryCode): static
+    public function setCountryCode(?string $countryCode): self
     {
         $this->countryCode = $countryCode;
 
         return $this;
     }
 
-    public function setDescription(?string $description): static
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    public function setFilePath(?string $filePath): static
+    public function setFilePath(?string $filePath): self
     {
         $this->filePath = $filePath;
 
         return $this;
     }
 
-    public function setOrientation(string $orientation): static
+    public function setOrientation(string $orientation): self
     {
         $this->orientation = $orientation;
 
         return $this;
     }
 
-    public function setPlace(?Place $place): static
+    public function setPlace(?Place $place): self
     {
         $this->place = $place;
 
         return $this;
     }
 
-    public function setRegionCode(?string $regionCode): static
+    public function setRegionCode(?string $regionCode): self
     {
         $this->regionCode = $regionCode;
 
         return $this;
     }
 
-    public function setSortOrder(int $sortOrder): static
+    public function setSortOrder(int $sortOrder): self
     {
         $this->sortOrder = $sortOrder;
 
         return $this;
     }
 
-    public function setTitle(?string $title): static
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
 

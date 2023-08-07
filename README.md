@@ -1,26 +1,39 @@
 # travel-api
 
-Uses 
+Uses
 [Symfony](https://symfony.com/),
 [API Platform](https://api-platform.com/),
-[Doctrine](https://www.doctrine-project.org/) and
-[MySQL](https://www.mysql.com/)
+[Doctrine](https://www.doctrine-project.org/),
+[MySQL](https://www.mysql.com/),
+[PHPUnit](https://phpunit.de/) and
+[Behat](https://behat.org/)
 
-1. Create MySQL Database e.g. TRAVEL
+1. Install Symfony CLI if not previously installed (https://symfony.com/download)
 
-2. Copy .env.dev.dist to .env.dev.local and set DATABASE_URL
+2. Create MySQL Database e.g. TRAVEL
 
-3. Install dependencies
+3. Copy .env.dev.dist to .env.dev.local and set DATABASE_URL
+
+4. Install dependencies
 ```sh
 composer install
 ```
 
-4. Run composer dump-env for dev environment
+5. Run composer dump-env for dev environment
 ```sh
 composer dump-env dev
 ```
 
-5. Create data fixtures 
+6. Run doctrine migrations
+```sh
+php bin/console doctrine:migrations:migrate
+```
+or
+```sh
+symfony console doctrine:migrations:migrate
+```
+
+7. Create data fixtures
 ```sh
 php bin/console doctrine:fixtures:load
 ```
@@ -28,15 +41,21 @@ or
 ```sh
 symfony console doctrine:fixtures:load
 ```
-6. Run server
+
+8. Run server
 ```sh
 symfony server:start --no-tls
 ```
 
-7. Open http://localhost:8000/api to view API documentation
+9. Open http://localhost:8000/api to view API documentation
 
 
-8. Run unit tests
+10. Run unit tests
 ```sh
 php bin/phpunit
+```
+
+11. Run API tests
+```sh
+php vendor/bin/behat
 ```

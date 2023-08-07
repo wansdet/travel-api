@@ -27,6 +27,8 @@ App\Entity\Place:
             groups: ['Place:read', 'Place:update' ,'Place:write']
         ranking:
             groups: ['Place:read', 'PlaceCollection:read', 'Place:update' ,'Place:write', 'Country:read']
+        slug:
+            groups: ['Place:read', 'PlaceCollection:read', 'Place:update' ,'Place:write']
         worldRanking:
             groups: [ 'Place:read', 'PlaceCollection:read', 'Place:update' ,'Place:write' ]
         sortOrder:

@@ -38,6 +38,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             denormalizationContext: [
                 'groups' => ['Country:write'],
             ],
+            security: 'is_granted("ROLE_ADMIN")',
         ),
         new Put(
             normalizationContext: [
@@ -46,6 +47,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             denormalizationContext: [
                 'groups' => ['Country:update'],
             ],
+            security: 'is_granted("ROLE_ADMIN")',
         ),
         new Patch(
             normalizationContext: [
@@ -54,8 +56,10 @@ use Symfony\Component\Validator\Constraints as Assert;
             denormalizationContext: [
                 'groups' => ['Country:update'],
             ],
+            security: 'is_granted("ROLE_ADMIN")',
         ),
         new Delete(
+            security: 'is_granted("ROLE_ADMIN")',
         ),
     ],
     filters: [
@@ -66,7 +70,8 @@ use Symfony\Component\Validator\Constraints as Assert;
     paginationClientItemsPerPage: true,
 )]
 #[ORM\Entity(repositoryClass: CountryRepository::class)]
-class Country
+#[ORM\HasLifecycleCallbacks]
+class Country implements AuthoredEntityInterface
 {
     use TimestampsTrait;
 
@@ -107,7 +112,6 @@ class Country
     private ?string $countryName = null;
 
     #[ORM\Column(length: 100)]
-    #[Assert\NotNull]
     #[Assert\Length(max: 100)]
     private ?string $createdBy = null;
 
@@ -189,7 +193,7 @@ class Country
         $this->places = new ArrayCollection();
     }
 
-    public function addPlace(Place $place): static
+    public function addPlace(Place $place): self
     {
         if (!$this->places->contains($place)) {
             $this->places->add($place);
@@ -324,7 +328,7 @@ class Country
         return $this->active;
     }
 
-    public function removePlace(Place $place): static
+    public function removePlace(Place $place): self
     {
         if ($this->places->removeElement($place)) {
             // set the owning side to null (unless already changed)
@@ -336,171 +340,167 @@ class Country
         return $this;
     }
 
-    public function setActive(bool $active): static
+    public function setActive(bool $active): self
     {
         $this->active = $active;
 
         return $this;
     }
 
-    public function setAlerts(?string $alerts): static
+    public function setAlerts(?string $alerts): self
     {
         $this->alerts = $alerts;
 
         return $this;
     }
 
-    public function setAtm(string $atm): static
+    public function setAtm(string $atm): self
     {
         $this->atm = $atm;
 
         return $this;
     }
 
-    public function setBriefDescription(string $briefDescription): static
+    public function setBriefDescription(string $briefDescription): self
     {
         $this->briefDescription = $briefDescription;
 
         return $this;
     }
 
-    public function setCapital(string $capital): static
+    public function setCapital(string $capital): self
     {
         $this->capital = $capital;
 
         return $this;
     }
 
-    public function setCountryCode(string $countryCode): static
+    public function setCountryCode(string $countryCode): self
     {
         $this->countryCode = $countryCode;
 
         return $this;
     }
 
-    public function setCountryName(string $countryName): static
+    public function setCountryName(string $countryName): self
     {
         $this->countryName = $countryName;
 
         return $this;
     }
 
-    public function setCreatedBy(string $createdBy): static
+    public function setCreatedBy(string $createdBy): void
     {
         $this->createdBy = $createdBy;
-
-        return $this;
     }
 
-    public function setCurrency(string $currency): static
+    public function setCurrency(string $currency): self
     {
         $this->currency = $currency;
 
         return $this;
     }
 
-    public function setElectricity(string $electricity): static
+    public function setElectricity(string $electricity): self
     {
         $this->electricity = $electricity;
 
         return $this;
     }
 
-    public function setEntry(?string $entry): static
+    public function setEntry(?string $entry): self
     {
         $this->entry = $entry;
 
         return $this;
     }
 
-    public function setGettingAround(?string $gettingAround): static
+    public function setGettingAround(?string $gettingAround): self
     {
         $this->gettingAround = $gettingAround;
 
         return $this;
     }
 
-    public function setImageTags(?array $imageTags): static
+    public function setImageTags(?array $imageTags): self
     {
         $this->imageTags = $imageTags;
 
         return $this;
     }
 
-    public function setLanguage(string $language): static
+    public function setLanguage(string $language): self
     {
         $this->language = $language;
 
         return $this;
     }
 
-    public function setLongDescription(string $longDescription): static
+    public function setLongDescription(string $longDescription): self
     {
         $this->longDescription = $longDescription;
 
         return $this;
     }
 
-    public function setMobilePhone(string $mobilePhone): static
+    public function setMobilePhone(string $mobilePhone): self
     {
         $this->mobilePhone = $mobilePhone;
 
         return $this;
     }
 
-    public function setRanking(int $ranking): static
+    public function setRanking(int $ranking): self
     {
         $this->ranking = $ranking;
 
         return $this;
     }
 
-    public function setRegion(?Region $region): static
+    public function setRegion(?Region $region): self
     {
         $this->region = $region;
 
         return $this;
     }
 
-    public function setSafety(?string $safety): static
+    public function setSafety(?string $safety): self
     {
         $this->safety = $safety;
 
         return $this;
     }
 
-    public function setSalesTax(?string $salesTax): static
+    public function setSalesTax(?string $salesTax): self
     {
         $this->salesTax = $salesTax;
 
         return $this;
     }
 
-    public function setShortDescription(string $shortDescription): static
+    public function setShortDescription(string $shortDescription): self
     {
         $this->shortDescription = $shortDescription;
 
         return $this;
     }
 
-    public function setSortOrder(int $sortOrder): static
+    public function setSortOrder(int $sortOrder): self
     {
         $this->sortOrder = $sortOrder;
 
         return $this;
     }
 
-    public function setTravel(?string $travel): static
+    public function setTravel(?string $travel): self
     {
         $this->travel = $travel;
 
         return $this;
     }
 
-    public function setUpdatedBy(?string $updatedBy): static
+    public function setUpdatedBy(?string $updatedBy): void
     {
         $this->updatedBy = $updatedBy;
-
-        return $this;
     }
 }

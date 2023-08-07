@@ -1,6 +1,8 @@
 # config/serialization/country.serialization.yaml
 App\Entity\Country:
     attributes:
+        active:
+            groups: ['Country:read', 'CountryCollection:read', 'Country:update' ,'Country:write']
         countryCode:
             groups: ['Country:read', 'CountryCollection:read', 'Country:write', 'Region:read']
         countryName:
@@ -8,6 +10,8 @@ App\Entity\Country:
         region:
             groups: ['Country:read', 'Country:update' ,'Country:write']
         capital:
+            groups: ['Country:read', 'Country:update' ,'Country:write']
+        createdBy:
             groups: ['Country:read', 'Country:update' ,'Country:write']
         briefDescription:
             groups: ['Country:read', 'CountryCollection:read', 'Country:update' ,'Country:write', 'Region:read']
@@ -28,7 +32,7 @@ App\Entity\Country:
         imageTags:
             groups: ['Country:read', 'Country:update' ,'Country:write']
         ranking:
-            groups: ['Region:read', 'RegionCollection:read', 'Region:update' ,'Region:write']
+            groups: ['Country:read', 'CountryCollection:read', 'Country:update' ,'Country:write']
         sortOrder:
             groups: ['Country:read', 'CountryCollection:read', 'Country:update' ,'Country:write', 'Region:read']
         places:

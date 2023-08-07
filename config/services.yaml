@@ -12,6 +12,7 @@ imports:
     - { resource: ../config/filter/place-image.filter.yaml }
     - { resource: ../config/filter/featured-destination.filter.yaml }
     - { resource: ../config/filter/featured-image.filter.yaml }
+    - { resource: ../config/filter/user.filter.yaml }
 
 services:
     # default configuration for services in *this* file

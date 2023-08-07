@@ -1,0 +1,35 @@
+# config/serialization/user.serialization.yaml
+App\Entity\User:
+    attributes:
+        createdAt:
+            groups: ['User:read', 'UserCollection:read']
+        createdBy:
+            groups: ['User:read', 'UserCollection:read']
+        displayName:
+            groups: ['User:read', 'UserCollection:read', 'User:update', 'User:write']
+        dob:
+            groups: ['User:read', 'UserCollection:read', 'User:update', 'User:write']
+        email:
+            groups: ['User:read', 'UserCollection:read', 'User:update', 'User:write']
+        firstName:
+            groups: ['User:read', 'UserCollection:read', 'User:update', 'User:write']
+        id:
+            groups: ['UserCollection:read']
+        lastName:
+            groups: ['User:read', 'UserCollection:read', 'User:update', 'User:write']
+        middleName:
+            groups: ['User:read', 'UserCollection:read', 'User:update', 'User:write']
+        password:
+            groups: ['User:update', 'User:write']
+        roles:
+            groups: ['User:read', 'UserCollection:read', 'User:update']
+        sex:
+            groups: ['User:read', 'UserCollection:read', 'User:update', 'User:write']
+        status:
+            groups: ['User:read', 'UserCollection:read', 'User:update']
+        updatedAt:
+            groups: [ 'User:read', 'UserCollection:read' ]
+        updatedBy:
+            groups: ['User:read', 'UserCollection:read', 'User:update']
+        userId:
+            groups: ['User:read', 'UserCollection:read']

@@ -37,6 +37,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             denormalizationContext: [
                 'groups' => ['FeaturedImage:write'],
             ],
+            security: 'is_granted("ROLE_EDITOR")',
         ),
         new Put(
             normalizationContext: [
@@ -45,6 +46,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             denormalizationContext: [
                 'groups' => ['FeaturedImage:update'],
             ],
+            security: 'is_granted("ROLE_EDITOR")',
         ),
         new Patch(
             normalizationContext: [
@@ -53,8 +55,10 @@ use Symfony\Component\Validator\Constraints as Assert;
             denormalizationContext: [
                 'groups' => ['FeaturedImage:update'],
             ],
+            security: 'is_granted("ROLE_EDITOR")',
         ),
         new Delete(
+            security: 'is_granted("ROLE_EDITOR")',
         ),
     ],
     filters: [
@@ -170,70 +174,70 @@ class FeaturedImage
         return $this->title;
     }
 
-    public function setDescription(?string $description): static
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    public function setDestinationCode(?string $destinationCode): static
+    public function setDestinationCode(?string $destinationCode): self
     {
         $this->destinationCode = $destinationCode;
 
         return $this;
     }
 
-    public function setFilePath(string $filePath): static
+    public function setFilePath(string $filePath): self
     {
         $this->filePath = $filePath;
 
         return $this;
     }
 
-    public function setLink(?string $link): static
+    public function setLink(?string $link): self
     {
         $this->link = $link;
 
         return $this;
     }
 
-    public function setOrientation(string $orientation): static
+    public function setOrientation(string $orientation): self
     {
         $this->orientation = $orientation;
 
         return $this;
     }
 
-    public function setPageType(string $pageType): static
+    public function setPageType(string $pageType): self
     {
         $this->pageType = $pageType;
 
         return $this;
     }
 
-    public function setRanking(int $ranking): static
+    public function setRanking(int $ranking): self
     {
         $this->ranking = $ranking;
 
         return $this;
     }
 
-    public function setSection(int $section): static
+    public function setSection(int $section): self
     {
         $this->section = $section;
 
         return $this;
     }
 
-    public function setSortOrder(int $sortOrder): static
+    public function setSortOrder(int $sortOrder): self
     {
         $this->sortOrder = $sortOrder;
 
         return $this;
     }
 
-    public function setTitle(string $title): static
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 

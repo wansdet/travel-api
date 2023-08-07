@@ -37,6 +37,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             denormalizationContext: [
                 'groups' => ['Place:write'],
             ],
+            security: 'is_granted("ROLE_EDITOR")',
         ),
         new Put(
             normalizationContext: [
@@ -45,6 +46,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             denormalizationContext: [
                 'groups' => ['Place:update'],
             ],
+            security: 'is_granted("ROLE_EDITOR")',
         ),
         new Patch(
             normalizationContext: [
@@ -53,8 +55,10 @@ use Symfony\Component\Validator\Constraints as Assert;
             denormalizationContext: [
                 'groups' => ['Place:update'],
             ],
+            security: 'is_granted("ROLE_EDITOR")',
         ),
         new Delete(
+            security: 'is_granted("ROLE_EDITOR")',
         ),
     ],
     filters: [
@@ -65,7 +69,8 @@ use Symfony\Component\Validator\Constraints as Assert;
     paginationClientItemsPerPage: true,
 )]
 #[ORM\Entity(repositoryClass: PlaceRepository::class)]
-class Place
+#[ORM\HasLifecycleCallbacks]
+class Place implements AuthoredEntityInterface
 {
     use TimestampsTrait;
 
@@ -93,7 +98,6 @@ class Place
     private ?string $countryRegion = null;
 
     #[ORM\Column(length: 100)]
-    #[Assert\NotBlank]
     #[Assert\Length(min: 3, max: 100)]
     private ?string $createdBy = null;
 
@@ -291,147 +295,143 @@ class Place
         return $this->worldRanking;
     }
 
-    public function setAccommodation(?string $accommodation): static
+    public function setAccommodation(?string $accommodation): self
     {
         $this->accommodation = $accommodation;
 
         return $this;
     }
 
-    public function setBestTimeToVisit(string $bestTimeToVisit): static
+    public function setBestTimeToVisit(string $bestTimeToVisit): self
     {
         $this->bestTimeToVisit = $bestTimeToVisit;
 
         return $this;
     }
 
-    public function setBriefDescription(string $briefDescription): static
+    public function setBriefDescription(string $briefDescription): self
     {
         $this->briefDescription = $briefDescription;
 
         return $this;
     }
 
-    public function setCountry(?Country $country): static
+    public function setCountry(?Country $country): self
     {
         $this->country = $country;
 
         return $this;
     }
 
-    public function setCountryRegion(?string $countryRegion): static
+    public function setCountryRegion(?string $countryRegion): self
     {
         $this->countryRegion = $countryRegion;
 
         return $this;
     }
 
-    public function setCreatedBy(string $createdBy): static
+    public function setCreatedBy(string $createdBy): void
     {
         $this->createdBy = $createdBy;
-
-        return $this;
     }
 
-    public function setDayTrips(?string $dayTrips): static
+    public function setDayTrips(?string $dayTrips): self
     {
         $this->dayTrips = $dayTrips;
 
         return $this;
     }
 
-    public function setFood(?string $food): static
+    public function setFood(?string $food): self
     {
         $this->food = $food;
 
         return $this;
     }
 
-    public function setImageTags(?array $imageTags): static
+    public function setImageTags(?array $imageTags): self
     {
         $this->imageTags = $imageTags;
 
         return $this;
     }
 
-    public function setLongDescription(string $longDescription): static
+    public function setLongDescription(string $longDescription): self
     {
         $this->longDescription = $longDescription;
 
         return $this;
     }
 
-    public function setPlaceCode(?string $placeCode): static
+    public function setPlaceCode(?string $placeCode): self
     {
         $this->placeCode = $placeCode;
 
         return $this;
     }
 
-    public function setPlaceName(string $placeName): static
+    public function setPlaceName(string $placeName): self
     {
         $this->placeName = $placeName;
 
         return $this;
     }
 
-    public function setRanking(int $ranking): static
+    public function setRanking(int $ranking): self
     {
         $this->ranking = $ranking;
 
         return $this;
     }
 
-    public function setSafety(?string $safety): static
+    public function setSafety(?string $safety): self
     {
         $this->safety = $safety;
 
         return $this;
     }
 
-    public function setSlug(string $slug): static
+    public function setSlug(string $slug): self
     {
         $this->slug = $slug;
 
         return $this;
     }
 
-    public function setSortOrder(int $sortOrder): static
+    public function setSortOrder(int $sortOrder): self
     {
         $this->sortOrder = $sortOrder;
 
         return $this;
     }
 
-    public function setTags(?array $tags): static
+    public function setTags(?array $tags): self
     {
         $this->tags = $tags;
 
         return $this;
     }
 
-    public function setThingsToDo(string $thingsToDo): static
+    public function setThingsToDo(string $thingsToDo): self
     {
         $this->thingsToDo = $thingsToDo;
 
         return $this;
     }
 
-    public function setTravelInformation(string $travelInformation): static
+    public function setTravelInformation(string $travelInformation): self
     {
         $this->travelInformation = $travelInformation;
 
         return $this;
     }
 
-    public function setUpdatedBy(?string $updatedBy): static
+    public function setUpdatedBy(?string $updatedBy): void
     {
         $this->updatedBy = $updatedBy;
-
-        return $this;
     }
 
-    public function setWorldRanking(int $worldRanking): static
+    public function setWorldRanking(int $worldRanking): self
     {
         $this->worldRanking = $worldRanking;
 

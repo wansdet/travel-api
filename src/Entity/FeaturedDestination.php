@@ -36,6 +36,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             denormalizationContext: [
                 'groups' => ['FeaturedDestination:write'],
             ],
+            security: 'is_granted("ROLE_EDITOR")',
         ),
         new Put(
             normalizationContext: [
@@ -44,6 +45,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             denormalizationContext: [
                 'groups' => ['FeaturedDestination:update'],
             ],
+            security: 'is_granted("ROLE_EDITOR")',
         ),
         new Patch(
             normalizationContext: [
@@ -52,8 +54,10 @@ use Symfony\Component\Validator\Constraints as Assert;
             denormalizationContext: [
                 'groups' => ['FeaturedDestination:update'],
             ],
+            security: 'is_granted("ROLE_EDITOR")',
         ),
         new Delete(
+            security: 'is_granted("ROLE_EDITOR")',
         ),
     ],
     filters: [
@@ -133,42 +137,42 @@ class FeaturedDestination
         return $this->title;
     }
 
-    public function setDescription(string $description): static
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    public function setDestinationCode(?string $destinationCode): static
+    public function setDestinationCode(?string $destinationCode): self
     {
         $this->destinationCode = $destinationCode;
 
         return $this;
     }
 
-    public function setPageType(string $pageType): static
+    public function setPageType(string $pageType): self
     {
         $this->pageType = $pageType;
 
         return $this;
     }
 
-    public function setSection(int $section): static
+    public function setSection(int $section): self
     {
         $this->section = $section;
 
         return $this;
     }
 
-    public function setSortOrder(int $sortOrder): static
+    public function setSortOrder(int $sortOrder): self
     {
         $this->sortOrder = $sortOrder;
 
         return $this;
     }
 
-    public function setTitle(string $title): static
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 

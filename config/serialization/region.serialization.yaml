@@ -19,6 +19,8 @@ App\Entity\Region:
             groups: ['Region:read', 'RegionCollection:read', 'Region:update' ,'Region:write']
         createdAt:
             groups: ['Region:read']
+        createdBy:
+            groups: ['Region:read', 'Region:write']
         updatedAt:
             groups: ['Region:read']
         updatedBy:

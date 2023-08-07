@@ -38,6 +38,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             denormalizationContext: [
                 'groups' => ['Region:write'],
             ],
+            security: 'is_granted("ROLE_ADMIN")',
         ),
         new Put(
             normalizationContext: [
@@ -46,6 +47,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             denormalizationContext: [
                 'groups' => ['Region:update'],
             ],
+            security: 'is_granted("ROLE_ADMIN")',
         ),
         new Patch(
             normalizationContext: [
@@ -54,8 +56,10 @@ use Symfony\Component\Validator\Constraints as Assert;
             denormalizationContext: [
                 'groups' => ['Region:update'],
             ],
+            security: 'is_granted("ROLE_ADMIN")',
         ),
         new Delete(
+            security: 'is_granted("ROLE_ADMIN")',
         ),
     ],
     filters: [
@@ -65,7 +69,8 @@ use Symfony\Component\Validator\Constraints as Assert;
     paginationClientItemsPerPage: true,
 )]
 #[ORM\Entity(repositoryClass: RegionRepository::class)]
-class Region
+#[ORM\HasLifecycleCallbacks]
+class Region implements AuthoredEntityInterface
 {
     use TimestampsTrait;
 
@@ -78,7 +83,6 @@ class Region
     private Collection $countries;
 
     #[ORM\Column(length: 100)]
-    #[Assert\NotNull]
     #[Assert\Length(max: 100)]
     private ?string $createdBy = null;
 
@@ -125,7 +129,7 @@ class Region
         $this->countries = new ArrayCollection();
     }
 
-    public function addCountry(Country $country): static
+    public function addCountry(Country $country): self
     {
         if (!$this->countries->contains($country)) {
             $this->countries->add($country);
@@ -193,7 +197,7 @@ class Region
         return $this->updatedBy;
     }
 
-    public function removeCountry(Country $country): static
+    public function removeCountry(Country $country): self
     {
         if ($this->countries->removeElement($country)) {
             // set the owning side to null (unless already changed)
@@ -205,73 +209,69 @@ class Region
         return $this;
     }
 
-    public function setBriefDescription(string $briefDescription): static
+    public function setBriefDescription(string $briefDescription): self
     {
         $this->briefDescription = $briefDescription;
 
         return $this;
     }
 
-    public function setCreatedBy(string $createdBy): static
+    public function setCreatedBy(string $createdBy): void
     {
         $this->createdBy = $createdBy;
-
-        return $this;
     }
 
-    public function setImageTags(?array $imageTags): static
+    public function setImageTags(?array $imageTags): self
     {
         $this->imageTags = $imageTags;
 
         return $this;
     }
 
-    public function setLongDescription(string $longDescription): static
+    public function setLongDescription(string $longDescription): self
     {
         $this->longDescription = $longDescription;
 
         return $this;
     }
 
-    public function setRanking(int $ranking): static
+    public function setRanking(int $ranking): self
     {
         $this->ranking = $ranking;
 
         return $this;
     }
 
-    public function setRegionCode(string $regionCode): static
+    public function setRegionCode(string $regionCode): self
     {
         $this->regionCode = $regionCode;
 
         return $this;
     }
 
-    public function setRegionName(string $regionName): static
+    public function setRegionName(string $regionName): self
     {
         $this->regionName = $regionName;
 
         return $this;
     }
 
-    public function setShortDescription(string $shortDescription): static
+    public function setShortDescription(string $shortDescription): self
     {
         $this->shortDescription = $shortDescription;
 
         return $this;
     }
 
-    public function setSortOrder(int $sortOrder): static
+    public function setSortOrder(int $sortOrder): self
     {
         $this->sortOrder = $sortOrder;
 
         return $this;
     }
 
-    public function setUpdatedBy(?string $updatedBy): static
+    public function setUpdatedBy(?string $updatedBy): void
     {
         $this->updatedBy = $updatedBy;
-
-        return $this;
     }
 }

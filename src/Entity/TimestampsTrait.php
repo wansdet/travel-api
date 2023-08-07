@@ -28,12 +28,14 @@ trait TimestampsTrait
     #[ORM\PrePersist]
     public function prePersist(): void
     {
+        // var_dump('prePersist');
         $this->setCreatedAt(new \DateTimeImmutable());
     }
 
     #[ORM\PreUpdate]
     public function preUpdate(): void
     {
+        // var_dump('preUpdate');
         $this->setUpdatedAt(new \DateTimeImmutable());
     }
 

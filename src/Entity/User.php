@@ -6,6 +6,12 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,11 +21,51 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Validator\Constraints as Assert;
 
+#[ApiResource(
+    operations: [
+        new Get(
+            security: 'is_granted("ROLE_MODERATOR") or (is_granted("IS_AUTHENTICATED_FULLY") and object.getUserIdentifier() == user.getUserIdentifier())',
+        ),
+        new GetCollection(
+            normalizationContext: [
+                'groups' => ['UserCollection:read'],
+            ],
+            security: 'is_granted("ROLE_MODERATOR")',
+        ),
+        new Post(
+            denormalizationContext: [
+                'groups' => ['User:write'],
+            ],
+            security: 'is_granted("ROLE_ADMIN") or (is_granted("IS_AUTHENTICATED_FULLY") and object.getUserIdentifier() == user.getUserIdentifier())',
+        ),
+        new Put(
+            denormalizationContext: [
+                'groups' => ['User:update'],
+            ],
+            security: 'is_granted("ROLE_ADMIN") or (is_granted("IS_AUTHENTICATED_FULLY") and object.getUserIdentifier() == user.getUserIdentifier())',
+        ),
+        new Patch(
+            denormalizationContext: [
+                'groups' => ['User:update'],
+            ],
+            security: 'is_granted("ROLE_ADMIN") or (is_granted("IS_AUTHENTICATED_FULLY") and object.getUserIdentifier() == user.getUserIdentifier())',
+        ),
+        new Delete(
+            security: 'is_granted("ROLE_ADMIN")',
+        ),
+    ],
+    normalizationContext: [
+        'groups' => ['User:read'],
+    ],
+    filters: [
+        'user.order_filter',
+    ],
+    paginationClientItemsPerPage: true,
+)]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ApiResource]
 #[ORM\HasLifecycleCallbacks]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, AuthoredEntityInterface
 {
     use TimestampsTrait;
 
@@ -69,7 +115,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     ];
 
     #[ORM\Column(length: 100)]
-    #[Assert\NotNull]
     #[Assert\Length(max: 100)]
     private ?string $createdBy = null;
 
@@ -183,6 +228,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->middleName;
     }
 
+    public function getName(): string
+    {
+        return sprintf('%s %s', $this->firstName, $this->lastName);
+    }
+
     public function getPassword(): ?string
     {
         return $this->password;
@@ -218,91 +268,87 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
-    public function setCreatedBy(string $createdBy): static
+    public function setCreatedBy(string $createdBy): void
     {
         $this->createdBy = $createdBy;
-
-        return $this;
     }
 
-    public function setDisplayName(?string $displayName): static
+    public function setDisplayName(?string $displayName): self
     {
         $this->displayName = $displayName;
 
         return $this;
     }
 
-    public function setDob(?\DateTimeInterface $dob): static
+    public function setDob(?\DateTimeInterface $dob): self
     {
         $this->dob = $dob;
 
         return $this;
     }
 
-    public function setEmail(string $email): static
+    public function setEmail(string $email): self
     {
         $this->email = $email;
 
         return $this;
     }
 
-    public function setFirstName(string $firstName): static
+    public function setFirstName(string $firstName): self
     {
         $this->firstName = $firstName;
 
         return $this;
     }
 
-    public function setLastName(string $lastName): static
+    public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
 
         return $this;
     }
 
-    public function setMiddleName(?string $middleName): static
+    public function setMiddleName(?string $middleName): self
     {
         $this->middleName = $middleName;
 
         return $this;
     }
 
-    public function setPassword(string $password): static
+    public function setPassword(string $password): self
     {
         $this->password = $password;
 
         return $this;
     }
 
-    public function setRoles(array $roles): static
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
 
         return $this;
     }
 
-    public function setSex(string $sex): static
+    public function setSex(string $sex): self
     {
         $this->sex = $sex;
 
         return $this;
     }
 
-    public function setStatus(string $status): static
+    public function setStatus(string $status): self
     {
         $this->status = $status;
 
         return $this;
     }
 
-    public function setUpdatedBy(?string $updatedBy): static
+    public function setUpdatedBy(?string $updatedBy): void
     {
         $this->updatedBy = $updatedBy;
-
-        return $this;
     }
 
-    public function setUserId(Uuid $userId): static
+    public function setUserId(Uuid $userId): self
     {
         $this->userId = $userId;
 
